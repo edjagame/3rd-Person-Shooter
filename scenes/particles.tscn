@@ -29,6 +29,7 @@ amount = 20
 one_shot = true
 explosiveness = 1.0
 fixed_fps = 60
+trail_enabled = true
 process_material = SubResource("ParticleProcessMaterial_j88y3")
 draw_pass_1 = SubResource("QuadMesh_m75rr")
 

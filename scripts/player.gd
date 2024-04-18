@@ -42,7 +42,7 @@ func shoot() -> void:
 	var bullet_instance = bullet.instantiate()
 	bullet_instance.position = bullet_spawn.global_position
 	bullet_instance.transform.basis = bullet_spawn.global_transform.basis
-	bullet_instance.bullet_collided.connect(_on_bullet_collision)
+	#bullet_instance.bullet_collided.connect(_on_bullet_collision)
 	get_parent().add_child(bullet_instance)
 	
 func check_aim() -> void:
@@ -84,7 +84,7 @@ func move(delta: float) -> void:
 		
 	move_and_slide()
 
-func _on_bullet_collision() -> void:
-	var particle_instance = particle.instantiate()
-	particle_instance.global_position = collision_point
-	get_parent().add_child(particle_instance)
+#func _on_bullet_collision() -> void:
+	#var particle_instance = particle.instantiate()
+	#particle_instance.global_position = collision_point
+	#get_parent().add_child(particle_instance)

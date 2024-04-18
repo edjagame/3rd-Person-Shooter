@@ -26,8 +26,11 @@ surface_material_override/0 = SubResource("StandardMaterial3D_lr27d")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_yotpa")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="NoCollisionTimeout" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="NoCollisionTimeout" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="NoCollisionTimeout" to="." method="_on_no_collision_timeout_timeout"]
