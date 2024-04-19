@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://4snq06yv5rj3"]
+[gd_scene load_steps=10 format=3 uid="uid://4snq06yv5rj3"]
 
 [ext_resource type="PackedScene" uid="uid://cw2xvt27s2uxn" path="res://scenes/player.tscn" id="1_wpr1g"]
+[ext_resource type="PackedScene" uid="uid://duuuek20qi1m0" path="res://enemy.tscn" id="2_po46o"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_u2p5t"]
 size = Vector3(60, 2, 60)
@@ -64,3 +65,17 @@ mesh = SubResource("BoxMesh_s22v5")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="World/StaticBody3D"]
 shape = SubResource("BoxShape3D_rx7te")
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="enemy" parent="Node3D" instance=ExtResource("2_po46o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 3, 6)
+MAX_HEALTH = 10
+
+[node name="enemy2" parent="Node3D" instance=ExtResource("2_po46o")]
+transform = Transform3D(-0.346854, 0, 0.937919, 0, 1, 0, -0.937919, 0, -0.346854, 25.8628, 7.68225, -11.883)
+MAX_HEALTH = 10
+
+[node name="enemy3" parent="Node3D" instance=ExtResource("2_po46o")]
+transform = Transform3D(0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, 0.258819, 0, 3, -9)
+MAX_HEALTH = 10

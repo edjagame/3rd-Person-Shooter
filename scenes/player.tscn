@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://cw2xvt27s2uxn"]
 
-[ext_resource type="Script" path="res://scripts/player.gd" id="1_ygusk"]
+[ext_resource type="Script" path="res://scenes/player.gd" id="1_ygusk"]
 [ext_resource type="Texture2D" uid="uid://dfa8yy181ogid" path="res://assets/crosshair.png" id="3_8qrbc"]
 [ext_resource type="PackedScene" uid="uid://dp1f33dy7tfrv" path="res://assets/temp.glb" id="3_cwvhq"]
 [ext_resource type="Script" path="res://SpringArm3D.gd" id="3_q4k7n"]

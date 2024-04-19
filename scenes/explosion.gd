@@ -12,5 +12,4 @@ func _process(delta):
 
 
 func _on_timer_timeout():
-	pass
-	#queue_free()
+	queue_free()

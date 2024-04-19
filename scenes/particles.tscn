@@ -25,11 +25,12 @@ script = ExtResource("1_v4ilt")
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 material_override = SubResource("StandardMaterial3D_5ktlj")
 emitting = false
-amount = 20
+amount = 30
+lifetime = 0.5
 one_shot = true
 explosiveness = 1.0
 fixed_fps = 60
-trail_enabled = true
+collision_base_size = 0.0
 process_material = SubResource("ParticleProcessMaterial_j88y3")
 draw_pass_1 = SubResource("QuadMesh_m75rr")
 

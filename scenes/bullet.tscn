@@ -32,5 +32,5 @@ one_shot = true
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
-[connection signal="timeout" from="NoCollisionTimeout" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="NoCollisionTimeout" to="." method="_on_no_collision_timeout_timeout"]
+[connection signal="timeout" from="NoCollisionTimeout" to="." method="_on_timer_timeout"]
