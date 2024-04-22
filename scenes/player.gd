@@ -11,8 +11,8 @@ extends CharacterBody3D
 @onready var bullet_trajectory = $BulletTrajectory
 @onready var camera = $SpringArm3D/Camera3D
 @onready var crosshair = $SpringArm3D/Camera3D/Crosshair
-@onready var weapon = $Model/Weapon
-@onready var bullet_spawn = $Model/Weapon/BulletSpawn
+@onready var weapon = $Model/gunstaff
+@onready var bullet_spawn = $Model/gunstaff/BulletSpawn
 @onready var aim = $AimCasts/Aim
 @onready var fire = $AimCasts/Fire
 
@@ -35,7 +35,7 @@ func _process(_delta: float) -> void:
 	var turn_weight: float = 0.1
 	model.rotation.y = lerp_angle(model.rotation.y, spring_arm_3d.rotation.y, turn_weight)
 	spring_arm_3d.position = position
-	weapon.rotation.z = -camera.global_rotation.x
+	weapon.rotation.z = -(camera.global_rotation.x - 45.4)
 	weapon.rotation.y = deg_to_rad(-90)
 	
 func shoot() -> void:
