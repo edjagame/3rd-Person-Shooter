@@ -37,11 +37,13 @@ texture = ExtResource("3_8qrbc")
 
 [node name="Weapon" parent="Model" instance=ExtResource("4_nr1qb")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1.22373, 0.791365, -0.560052)
+visible = false
 
 [node name="gunstaff" parent="Model" instance=ExtResource("6_6a18e")]
+transform = Transform3D(-0.000118725, 0.0153056, -0.999883, 0.99997, 0.00776662, 1.50992e-07, 0.00776571, -0.999853, -0.0153061, 1.35907, 0.847758, 0.744649)
 
 [node name="BulletSpawn" type="Marker3D" parent="Model/gunstaff"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.22373, 0.791365, -1.86005)
+transform = Transform3D(1, 1.90921e-08, 1.74623e-10, 1.39698e-09, 1, -1.95578e-08, 2.98314e-10, -2.70084e-08, 1, -0.974525, 9.10751, 0.0150167)
 
 [node name="AimCasts" type="Node3D" parent="."]
 top_level = true
