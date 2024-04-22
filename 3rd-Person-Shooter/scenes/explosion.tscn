@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://bve2jph8pb6su"]
+
+[ext_resource type="Script" path="res://scenes/explosion.gd" id="1_mhtlk"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pjkfc"]
+albedo_color = Color(1, 0, 0, 1)
+emission_enabled = true
+emission = Color(1, 0.556863, 0.364706, 1)
+emission_energy_multiplier = 5.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xigaj"]
+lifetime_randomness = 0.5
+emission_shape_offset = Vector3(0.2, 0.2, 0.2)
+emission_shape = 1
+emission_sphere_radius = 1.0
+angle_min = -720.0
+angle_max = 720.0
+spread = 180.0
+initial_velocity_min = 10.0
+initial_velocity_max = 15.0
+
+[sub_resource type="PrismMesh" id="PrismMesh_y7o6b"]
+
+[node name="Explosion" type="Node3D"]
+script = ExtResource("1_mhtlk")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+material_override = SubResource("StandardMaterial3D_pjkfc")
+emitting = false
+amount = 30
+lifetime = 1.5
+one_shot = true
+explosiveness = 0.8
+randomness = 0.5
+collision_base_size = 0.0
+process_material = SubResource("ParticleProcessMaterial_xigaj")
+draw_pass_1 = SubResource("PrismMesh_y7o6b")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 1.5
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

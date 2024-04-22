@@ -1,0 +1,116 @@
+[gd_scene load_steps=18 format=3 uid="uid://4snq06yv5rj3"]
+
+[ext_resource type="PackedScene" uid="uid://cw2xvt27s2uxn" path="res://scenes/player.tscn" id="1_wpr1g"]
+[ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain.gd" id="2_jt02a"]
+[ext_resource type="PackedScene" uid="uid://duuuek20qi1m0" path="res://enemy.tscn" id="2_po46o"]
+[ext_resource type="Resource" path="res://terrain/data.hterrain" id="3_bqoew"]
+[ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain_texture_set.gd" id="4_y81s6"]
+[ext_resource type="Texture2D" uid="uid://erkoygiynw4h" path="res://assets/Ground/Rock032_1K-JPG_Color.jpg" id="5_bafbv"]
+[ext_resource type="Texture2D" uid="uid://cugsrnyt6ywtn" path="res://assets/Ground/Rock032_1K-JPG_Roughness.jpg" id="6_2l62k"]
+[ext_resource type="Texture2D" uid="uid://cx35jhg1tg6y2" path="res://assets/Ground/Rock032_1K-JPG_NormalGL.jpg" id="7_y3jbq"]
+[ext_resource type="Texture2D" uid="uid://beifn3lvqphb6" path="res://assets/Ground/Rock032_1K-JPG_NormalDX.jpg" id="8_2v40o"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_u2p5t"]
+size = Vector3(60, 2, 60)
+
+[sub_resource type="BoxMesh" id="BoxMesh_rhax3"]
+size = Vector3(60, 2, 60)
+
+[sub_resource type="BoxMesh" id="BoxMesh_qvn04"]
+size = Vector3(10, 3, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_okgmc"]
+size = Vector3(10, 3, 10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ysqgp"]
+albedo_color = Color(0.611765, 0.866667, 0.894118, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_s22v5"]
+material = SubResource("StandardMaterial3D_ysqgp")
+size = Vector3(2, 60, 60)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rx7te"]
+size = Vector3(2, 60, 60)
+
+[sub_resource type="Resource" id="Resource_w1m64"]
+script = ExtResource("4_y81s6")
+mode = 0
+textures = [[ExtResource("5_bafbv"), ExtResource("6_2l62k"), null], [ExtResource("7_y3jbq"), ExtResource("8_2v40o"), null]]
+
+[node name="Main" type="Node3D"]
+
+[node name="Player" parent="." instance=ExtResource("1_wpr1g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.1188, 6.92853, 62.3893)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.907777, 0.419452, 0, -0.419452, 0.907777, -26.0439, 58.8923, -89.3607)
+shadow_enabled = true
+
+[node name="World" type="Node3D" parent="."]
+
+[node name="Ground" type="StaticBody3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+visible = false
+collision_layer = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Ground"]
+shape = SubResource("BoxShape3D_u2p5t")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Ground"]
+mesh = SubResource("BoxMesh_rhax3")
+
+[node name="Obstacle" type="StaticBody3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 1.5, -10)
+visible = false
+collision_layer = 3
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Obstacle"]
+mesh = SubResource("BoxMesh_qvn04")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Obstacle"]
+shape = SubResource("BoxShape3D_okgmc")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 30, 0)
+visible = false
+collision_layer = 3
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/StaticBody3D"]
+mesh = SubResource("BoxMesh_s22v5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/StaticBody3D"]
+shape = SubResource("BoxShape3D_rx7te")
+
+[node name="HTerrain" type="Node3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+script = ExtResource("2_jt02a")
+_terrain_data = ExtResource("3_bqoew")
+chunk_size = 32
+collision_enabled = true
+collision_layer = 1
+collision_mask = 1
+shader_type = "Classic4Lite"
+custom_shader = null
+custom_globalmap_shader = null
+texture_set = SubResource("Resource_w1m64")
+render_layers = 1
+cast_shadow = 1
+shader_params/u_ground_uv_scale = 20
+shader_params/u_depth_blending = true
+shader_params/u_triplanar = null
+shader_params/u_tile_reduction = null
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41.4982, -0.383655, 64.2238)
+
+[node name="enemy" parent="Node3D" instance=ExtResource("2_po46o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 3, 6)
+MAX_HEALTH = 10
+
+[node name="enemy2" parent="Node3D" instance=ExtResource("2_po46o")]
+transform = Transform3D(-0.346854, 0, 0.937919, 0, 1, 0, -0.937919, 0, -0.346854, 25.8628, 7.68225, -11.883)
+MAX_HEALTH = 10
+
+[node name="enemy3" parent="Node3D" instance=ExtResource("2_po46o")]
+transform = Transform3D(0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, 0.258819, 0, 3, -9)
+MAX_HEALTH = 10

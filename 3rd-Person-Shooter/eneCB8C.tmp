@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://duuuek20qi1m0"]
+
+[ext_resource type="PackedScene" uid="uid://cbc64fub6083n" path="res://assets/amogus.glb" id="1_c0f1a"]
+[ext_resource type="Script" path="res://enemy.gd" id="1_i61pt"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xxkd5"]
+radius = 1.2
+height = 3.48531
+
+[node name="enemy" type="CharacterBody3D"]
+collision_layer = 3
+script = ExtResource("1_i61pt")
+MAX_HEALTH = null
+
+[node name="Model" parent="." instance=ExtResource("1_c0f1a")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.233576, 0)
+shape = SubResource("CapsuleShape3D_xxkd5")
+
+[node name="DeathAnimTimer" type="Timer" parent="."]
+
+[node name="MoveTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="DeathAnimTimer" to="." method="_on_death_anim_timer_timeout"]
+[connection signal="timeout" from="MoveTimer" to="." method="_on_move_timer_timeout"]

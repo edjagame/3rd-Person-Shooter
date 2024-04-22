@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://lqgqvmlp6xqi"]
+
+[ext_resource type="Script" path="res://scenes/particles.gd" id="1_v4ilt"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5ktlj"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 0.611765, 0.345098, 1)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_j88y3"]
+emission_shape = 1
+emission_sphere_radius = 0.2
+spread = 180.0
+initial_velocity_min = 20.0
+initial_velocity_max = 25.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_m75rr"]
+size = Vector2(0.1, 0.1)
+
+[node name="Particles" type="Node3D"]
+script = ExtResource("1_v4ilt")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+material_override = SubResource("StandardMaterial3D_5ktlj")
+emitting = false
+amount = 30
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 60
+collision_base_size = 0.0
+process_material = SubResource("ParticleProcessMaterial_j88y3")
+draw_pass_1 = SubResource("QuadMesh_m75rr")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

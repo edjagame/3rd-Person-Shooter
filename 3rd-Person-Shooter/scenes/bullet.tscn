@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://dys1ym3vcsqkg"]
+
+[ext_resource type="Script" path="res://scenes/bullet.gd" id="1_78x5r"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_x6nnk"]
+size = Vector3(0.1, 0.1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lr27d"]
+albedo_color = Color(1, 1, 0, 1)
+emission_enabled = true
+emission = Color(0, 1, 1, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yotpa"]
+size = Vector3(0.1, 0.1, 1)
+
+[node name="Bullet" type="Area3D"]
+collision_layer = 3
+collision_mask = 2
+script = ExtResource("1_78x5r")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_x6nnk")
+surface_material_override/0 = SubResource("StandardMaterial3D_lr27d")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_yotpa")
+
+[node name="NoCollisionTimeout" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="NoCollisionTimeout" to="." method="_on_no_collision_timeout_timeout"]
+[connection signal="timeout" from="NoCollisionTimeout" to="." method="_on_timer_timeout"]
